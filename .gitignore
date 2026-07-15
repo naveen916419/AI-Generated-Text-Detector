@@ -1,0 +1,17 @@
+venv/
+__pycache__/
+*.pyc
+.matplotlib/
+.streamlit/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Local caches and downloaded model data
+.cache/
+*.log
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+

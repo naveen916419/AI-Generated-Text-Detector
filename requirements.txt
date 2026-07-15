@@ -1,0 +1,15 @@
+pandas
+numpy
+scikit-learn
+spacy
+nltk
+transformers
+torch
+xgboost
+shap
+streamlit
+matplotlib
+seaborn
+requests
+wikipedia
+joblib
