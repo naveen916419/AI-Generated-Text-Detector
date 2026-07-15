@@ -59,9 +59,15 @@ TOPICS = [
 def main():
     generator = pipeline("text-generation", model="gpt2")
     generator.tokenizer.pad_token = generator.tokenizer.eos_token
+    topics = TOPICS
+    try:
+        topics = pd.read_csv("data/raw/human_text.csv")["topic"].dropna().tolist()
+    except FileNotFoundError:
+        pass
+
     rows = []
 
-    for topic in TOPICS:
+    for topic in topics:
         prompt = f"Write a short informative paragraph about {topic}."
         output = generator(
             prompt,
