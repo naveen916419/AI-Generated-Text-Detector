@@ -33,3 +33,14 @@ Note: this is a strong starter result, but the test set is still small. For a re
 venv\Scripts\activate
 streamlit run app\streamlit_app.py --server.fileWatcherType none
 ```
+
+## Deploy with Streamlit Community Cloud
+
+1. Create a GitHub repository and push this project, including `model.pkl`.
+   Do not commit the local `venv/` folder.
+2. In [Streamlit Community Cloud](https://share.streamlit.io/), choose **Create app**
+   and select the GitHub repository and branch.
+3. Set the main file path to `app/streamlit_app.py`, then click **Deploy**.
+
+The first launch downloads the GPT-2 model used to calculate perplexity, so it may
+take longer than normal. The app then caches the loaded models for later requests.

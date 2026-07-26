@@ -1,11 +1,32 @@
 import numpy as np
+import nltk
 import spacy
 import torch
 from nltk.tokenize import sent_tokenize, word_tokenize
 from transformers import GPT2LMHeadModel, GPT2TokenizerFast
 
 
-nlp = spacy.load("en_core_web_sm")
+def ensure_nltk_data():
+    """Download tokenizer data when the app starts on a fresh deployment."""
+    for resource, path in (("punkt", "tokenizers/punkt"), ("punkt_tab", "tokenizers/punkt_tab")):
+        try:
+            nltk.data.find(path)
+        except LookupError:
+            nltk.download(resource, quiet=True)
+
+
+def load_spacy_model():
+    try:
+        return spacy.load("en_core_web_sm")
+    except OSError as error:
+        raise RuntimeError(
+            "The spaCy English model is missing. Install it with "
+            "`python -m spacy download en_core_web_sm`."
+        ) from error
+
+
+ensure_nltk_data()
+nlp = load_spacy_model()
 tokenizer = GPT2TokenizerFast.from_pretrained("gpt2")
 model = GPT2LMHeadModel.from_pretrained("gpt2")
 model.eval()
